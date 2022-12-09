@@ -238,8 +238,10 @@ jobs:
       - run:
           name: Run migrations
           command: |
-            ls -la
+            ls -la 
             cd backend
+            ls -la
+            cat .env
             npm install
             npm run migrations 
          
