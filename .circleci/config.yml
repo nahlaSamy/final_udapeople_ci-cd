@@ -240,7 +240,7 @@ jobs:
           command: |
             cd backend
             npm install
-            npm run migrations > migrationS.txt
+            npm run migrations > migrations.txt
          
 
       - run:
@@ -406,7 +406,7 @@ workflows:
       #         only: [master]
       # - configure-infrastructure:
       #     requires: [deploy-infrastructure]
-      #- run-migrations
+      - run-migrations
           # requires: [configure-infrastructure]
       # - deploy-frontend:
       #     requires: [run-migrations]
