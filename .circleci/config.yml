@@ -290,7 +290,7 @@ jobs:
       - revert-migrations
       
                     
- deploy-backend:
+  deploy-backend:
     docker:
       - image: cimg/python:3.10
     steps:
