@@ -304,8 +304,6 @@ jobs:
           fingerprints: ["18:7c:4d:61:15:27:d5:d4:e8:40:00:21:48:f0:36:73"]
       - attach_workspace:
           at: ~/
-      - restore_cache:
-          keys: [backend-deps]
       - run:
           name: Package Backend
           command: |
