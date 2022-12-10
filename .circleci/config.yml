@@ -342,6 +342,10 @@ jobs:
                 --query 'Reservations[*].Instances[*].PublicIpAddress' \
                 --output text)
               export API_URL=http://${BACKEND_PUBLIC_IP}:3030
+              echo ${BACKEND_PUBLIC_IP}
+              echo backend-${CIRCLE_WORKFLOW_ID:0:7}
+              echo ${API_URL}
+              echo $API_URL/api/status
               if curl -s $API_URL/api/status | grep "ok"
               then
                 exit 0
