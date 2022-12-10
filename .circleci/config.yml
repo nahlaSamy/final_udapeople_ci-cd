@@ -298,10 +298,10 @@ jobs:
       - install_awscli
       - install_ansible
       - install_nodejs
+      - add_ssh_keys:
+        fingerprints: ["18:7c:4d:61:15:27:d5:d4:e8:40:00:21:48:f0:36:73"]
       - restore_cache:
           keys: [backend-deps]
-      - add_ssh_keys:
-          fingerprints: ["18:7c:4d:61:15:27:d5:d4:e8:40:00:21:48:f0:36:73"]
       - attach_workspace:
           at: ~/
       - run:
@@ -315,17 +315,23 @@ jobs:
       - run:
           name: Deploy backend
           command: |
+            cd backend
+            npm i
+            npm run build
+            cd ..
+            cd .circleci/ansible
+            mkdir files
+            cd files
+            tar -C ../../../backend -czvf artifact.tar.gz .
+            cd ../
+            echo "Contents  of the inventory.txt file is -------"
+            cat inventory.txt
             export TYPEORM_MIGRATIONS_DIR=./migrations
             export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
             export TYPEORM_MIGRATIONS=./migrations/*.ts
-            
-            cd .circleci/ansible
-            cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
-
       - destroy-environment
       - revert-migrations
-
   smoke-test:
       docker:
         - image: cimg/base:stable
