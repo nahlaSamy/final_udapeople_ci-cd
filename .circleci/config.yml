@@ -290,7 +290,7 @@ jobs:
       - revert-migrations
       
                     
-deploy-backend:
+  deploy-backend:
     docker:
       - image: cimg/python:3.10
     steps:
@@ -380,6 +380,7 @@ deploy-backend:
 #     steps:
 #       # Checkout code from git
 #       - run:
+
 #           name: Install dependencies
 #           command: |
 #             # your code here
