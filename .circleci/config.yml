@@ -386,7 +386,7 @@ jobs:
             aws cloudformation list-exports \
               --query "Exports[?Name==\`WorkflowID\`].Value" \
               --no-paginate --output text >> ~/project/oldWorkflowID.txt
-              
+
             cat ~/project/oldWorkflowID.txt
       - run:
           name: Update cloudfront distribution
@@ -452,7 +452,7 @@ workflows:
            requires: [run-migrations]
       - smoke-test:
           requires: [deploy-backend, deploy-frontend]
-      # # - cloudfront-update:
-      #     requires: [smoke-test]
+      - cloudfront-update:
+          requires: [smoke-test]
       # - cleanup:
       #     requires: [cloudfront-update]
