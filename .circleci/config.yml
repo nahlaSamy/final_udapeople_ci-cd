@@ -373,7 +373,7 @@ jobs:
       - destroy-environment
       - revert-migrations
 
-
+#run till smoke
 #   cloudfront-update:
 #     docker:
 #       # Docker image here that supports AWS CLI
